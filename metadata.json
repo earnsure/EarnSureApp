@@ -1,0 +1,7 @@
+{
+  "name": "EarnSure - Easy To Earn",
+  "description": "A comprehensive mobile-first earning platform featuring games, tasks, and reward systems with a robust admin dashboard.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}

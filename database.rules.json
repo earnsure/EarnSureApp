@@ -1,0 +1,61 @@
+
+{
+  "rules": {
+    "users": {
+      "$uid": {
+        ".read": "auth != null && (auth.uid === $uid || root.child('users').child(auth.uid).child('is_admin').val() === true || auth.token.email === 'earnsure@admin.com')",
+        ".write": "auth != null && (auth.uid === $uid || root.child('users').child(auth.uid).child('is_admin').val() === true || auth.token.email === 'earnsure@admin.com')",
+        "is_admin": {
+          ".validate": "newData.isBoolean() && (newData.val() === false || auth.token.email === 'earnsure@admin.com' || root.child('users').child(auth.uid).child('is_admin').val() === true)"
+        }
+      },
+      ".read": "auth != null && (root.child('users').child(auth.uid).child('is_admin').val() === true || auth.token.email === 'earnsure@admin.com')"
+    },
+    "transactions": {
+      ".read": "auth != null && (root.child('users').child(auth.uid).child('is_admin').val() === true || auth.token.email === 'earnsure@admin.com')",
+      "$uid": {
+        ".read": "auth != null && (auth.uid === $uid || root.child('users').child(auth.uid).child('is_admin').val() === true || auth.token.email === 'earnsure@admin.com')",
+        ".write": "auth != null && (auth.uid === $uid || root.child('users').child(auth.uid).child('is_admin').val() === true || auth.token.email === 'earnsure@admin.com')"
+      }
+    },
+    "tasks": {
+      ".read": "auth != null",
+      ".write": "auth != null && (root.child('users').child(auth.uid).child('is_admin').val() === true || auth.token.email === 'earnsure@admin.com')"
+    },
+    "proofs": {
+      ".read": "auth != null && (root.child('users').child(auth.uid).child('is_admin').val() === true || auth.token.email === 'earnsure@admin.com')",
+      "$proofId": {
+        ".read": "auth != null && (data.child('uid').val() === auth.uid || root.child('users').child(auth.uid).child('is_admin').val() === true || auth.token.email === 'earnsure@admin.com')",
+        ".write": "auth != null && (!data.exists() || root.child('users').child(auth.uid).child('is_admin').val() === true || auth.token.email === 'earnsure@admin.com')"
+      }
+    },
+    "withdrawals": {
+      ".read": "auth != null && (root.child('users').child(auth.uid).child('is_admin').val() === true || auth.token.email === 'earnsure@admin.com')",
+      "$requestId": {
+        ".read": "auth != null && (data.child('uid').val() === auth.uid || root.child('users').child(auth.uid).child('is_admin').val() === true || auth.token.email === 'earnsure@admin.com')",
+        ".write": "auth != null && (!data.exists() || root.child('users').child(auth.uid).child('is_admin').val() === true || auth.token.email === 'earnsure@admin.com')"
+      }
+    },
+    "announcements": {
+      ".read": "auth != null",
+      ".write": "auth != null && (root.child('users').child(auth.uid).child('is_admin').val() === true || auth.token.email === 'earnsure@admin.com')"
+    },
+    "notifications": {
+      "$uid": {
+        ".read": "auth != null && (auth.uid === $uid || root.child('users').child(auth.uid).child('is_admin').val() === true || auth.token.email === 'earnsure@admin.com')",
+        ".write": "auth != null"
+      }
+    },
+    "chats": {
+      ".read": "auth != null && (root.child('users').child(auth.uid).child('is_admin').val() === true || auth.token.email === 'earnsure@admin.com')",
+      "$uid": {
+        ".read": "auth != null && (auth.uid === $uid || root.child('users').child(auth.uid).child('is_admin').val() === true || auth.token.email === 'earnsure@admin.com')",
+        ".write": "auth != null && (auth.uid === $uid || root.child('users').child(auth.uid).child('is_admin').val() === true || auth.token.email === 'earnsure@admin.com')"
+      }
+    },
+    "settings": {
+      ".read": "auth != null",
+      ".write": "auth != null && (root.child('users').child(auth.uid).child('is_admin').val() === true || auth.token.email === 'earnsure@admin.com')"
+    }
+  }
+}
